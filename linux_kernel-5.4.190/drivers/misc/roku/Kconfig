@@ -1,0 +1,48 @@
+config ROKU_BACKLIGHT
+	tristate "Roku backlight state driver"
+	default y
+		select PWM_MT5896
+		select GPIO_MT5896
+		select I2C_MT5896
+	help
+	  Stores the backlight state in kernel's bss_noinit section.
+
+config ROKU_EARLY_PWR_MODE_HANDLER
+	tristate "Roku early pwr mode handler driver"
+	depends on ROKU_BACKLIGHT
+	default y
+		select MT5896_SARADC
+		select IRS_MTK
+	help
+	  Handles early pwr mode events prior to Application.
+
+config ROKU_UTPA_GOP
+	tristate "Roku gop integrate with utopia"
+	default n
+	help
+	  gop integrate with utopia.
+
+config ROKU_KPI
+	bool "Roku firmware kpi metrics driver"
+	help
+	  Enables Roku firmware kpi metric driver which helps in measuring
+	  different firmware kpi
+
+config ROKU_BOARD_ID
+	tristate "Roku BOARD"
+	default y
+	help
+	  To support Roku global TV hardware
+
+config ROKU_COMPONENT_INFO
+	bool "Roku MTK component information"
+	default n
+	---help---
+    	To enable or to disable Roku MTK component information
+
+config ROKU_LDMLED
+	tristate "Roku local dimming led driver"
+	default y
+	help
+	  Directly drive local dimming led drivces for mculess local dimming TV
+

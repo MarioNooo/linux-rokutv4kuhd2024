@@ -1,0 +1,7 @@
+config MSTAR_CMAPOOL
+	bool  "CMA POOL"
+	depends on CMA
+	select MP_PLATFORM_UTOPIA2_INTERRUPT
+
+	help
+		MStar CMA POOL driver function

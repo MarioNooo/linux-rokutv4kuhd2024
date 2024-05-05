@@ -1,0 +1,5 @@
+menuconfig ROKU_SWUPD
+    tristate "ROKU_SWUPD support"
+    depends on MTD
+    help
+	    Software Update driver to handle writes to flash for single partition software update

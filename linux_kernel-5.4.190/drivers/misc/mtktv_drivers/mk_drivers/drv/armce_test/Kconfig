@@ -1,0 +1,6 @@
+config MP_ARMCE_TEST
+	tristate "Arm Crypto Extension booting test"
+	default n
+	help
+		Arm Crypto Extension booting test
+

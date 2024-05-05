@@ -1,0 +1,6 @@
+config MSTAR_MPOOL
+	tristate "MPOOL"
+	depends on ARM || ARM64
+	help
+	  MStar MPOOL driver function
+

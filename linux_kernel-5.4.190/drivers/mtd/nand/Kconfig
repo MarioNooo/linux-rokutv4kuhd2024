@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config MTD_NAND_CORE
+	tristate
+
+config ROKU_MTD_NAND_ENCRYPTION
+	bool "Support for ROKU MTD NAND partition encryption"
+	depends on MTD_NAND
+	help
+	   Enables per-partition encryption of NAND devices. This has
+	   several side effects: encrypted NAND is no longer bit
+	   writable, and both reads and writes must be aligned on
+	   block (writesize) boundaries.
+
+source "drivers/mtd/nand/onenand/Kconfig"
+source "drivers/mtd/nand/raw/Kconfig"
+source "drivers/mtd/nand/spi/Kconfig"

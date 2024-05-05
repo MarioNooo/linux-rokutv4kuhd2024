@@ -1,0 +1,141 @@
+# drivers/MStar/Kconfig
+
+menu "MStar Platform Configuration"
+
+#===================================================
+# MStar Chip Selection
+#===================================================
+choice
+	prompt "MStar Chip Selection"
+	default None
+
+config MSTAR_NONE
+	bool "None"
+
+config MSTAR_MT5896
+	bool "MT5896"
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+	select ARM_AMBA
+	select ARM_TIMER_SP804
+	select COMMON_CLKDEV
+	select HAVE_CLK
+	select ICST
+	select PLAT_VERSATILE
+	help
+	 This enables support for the MT5867 32/64 bit mode kernel.
+
+endchoice
+
+#===================================================
+# MStar Chip (auto-select)
+# 0: None
+# 1: Titania
+# 2: Triton
+# 3: Titania2
+#===================================================
+config MSTAR_CHIP_TYPE
+	int
+	default 1 if MSTAR_TITANIA
+	default 2 if MSTAR_TRITON
+	default 3 if MSTAR_TITANIA2
+	default 4 if MSTAR_OBERON
+	default 5 if MSTAR_EUCLID
+	default 0
+
+#===================================================
+# MStar Chip Name (auto-select)
+#===================================================
+config MSTAR_CHIP_NAME
+	string
+	default "mt5896" if MSTAR_MT5896
+	default "error"
+
+#===================================================
+#Chip based define
+#===================================================
+config MSTAR_ARM
+    bool "Enable ARM BASE CPU"
+    default n
+config MSTAR_MIPS
+    bool "Enable MIPS BASE CPU"
+	depends on !MSTAR_ARM
+    default n
+
+
+#===================================================
+#Android recovery Flag
+#===================================================
+
+config WRITE_TO_ANDROID_MISC
+    bool "Write Andorid recovery command to partition"
+    default n
+
+choice
+  depends on WRITE_TO_ANDROID_MISC
+	prompt "storage type"
+	default EMMC
+
+config WRITE_TO_ANDROID_MISC_EMMC
+    bool "EMMC"
+
+config WRITE_TO_ANDROID_MISC_NAND
+    bool "NAND"
+endchoice
+
+config LX3_SUPPORT
+    bool "LX3 support"
+    default n
+
+
+#===================================================
+# CPU HOTPLUG
+#===================================================
+config MSTAR_CPU_HOTPLUG
+    bool "Enable Mstar cpu hotplug"
+    depends on HOTPLUG_CPU
+    default n
+
+
+if !MSTAR_NONE
+#==========================================
+# Remove this latter - cc.chen
+#==========================================
+config MSTAR_ARM_MMAP_GENERIC
+        depends on MSTAR_ARM
+        bool "Generic Memory Map (ARM)"
+
+config MSTAR_ARM_BD_GENERIC
+	bool "Generic Board Setting"
+
+
+#===================================================
+# MStar Device Drivers
+#===================================================
+comment "MStar Device Drivers"
+
+config MSTAR_UDEV_NODE
+    bool "use udev to genrate device node"
+    default n
+
+config ROKU_MSTAR_DRIVER_MODIFY
+    bool "roku mstar driver modify"
+    default y
+
+source "$(KERNEL_PATH_MSTAR2)/drv/mpool/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/system/Kconfig"
+#source "$(KERNEL_PATH_MSTAR2)/drv/gflip/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/graphic/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/xc/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/dolby/Kconfig"
+#source "$(KERNEL_PATH_MSTAR2)/drv/tch/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/hdr10plus_ref/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/semutex/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/sc/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/cma_pool/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/pm/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/r2/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/alsa_audio_driver/Kconfig"
+endif
+source "$(KERNEL_PATH_MSTAR2)/drv/armce_test/Kconfig"
+source "$(KERNEL_PATH_MSTAR2)/drv/iomap/Kconfig"
+endmenu

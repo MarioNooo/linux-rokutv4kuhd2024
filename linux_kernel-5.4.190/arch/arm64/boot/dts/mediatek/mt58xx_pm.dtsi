@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+/*
+ * Copyright (c) 2021 MediaTek Inc.
+ */
+
+/ {
+	mtk_pm: mtk-pm {
+		mboxes = <&mailbox_to_pm51 MBOX_CHAN_ID_CUS>;
+	};
+};

@@ -1,0 +1,9 @@
+config MTD_NAND_MTK_DTV
+	tristate "MTK DTV NAND controller"
+	depends on ARCH_MEDIATEK_DTV || COMPILE_TEST
+	depends on HAS_IOMEM
+	help
+	  Enables support for NAND controller on MTK DTV SoCs.
+	  This controller is found on mt5873 SoCs.
+config ROKU_MTD_NAND_MODIFY
+	tristate "Roku fetch NAND partname"

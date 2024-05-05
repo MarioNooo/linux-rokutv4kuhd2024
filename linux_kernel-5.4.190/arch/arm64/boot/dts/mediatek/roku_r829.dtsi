@@ -1,0 +1,39 @@
+/ {
+	roku_early_pwr_mode_handler: roku_early_pwr_mode_handler {
+		compatible = "roku_early_pwr_mode_handler";
+		io-channels = <&saradc 0>,<&saradc 1>;
+		io-channel-names = "adc0","adc1";
+	};
+
+	roku_backlight:roku_backlight {
+		compatible = "roku_backlight";
+	};
+
+	roku_kpi:roku_kpi {
+		compatible = "roku_kpi";
+	};
+
+	roku_ldmled:roku_ldmled {
+		compatible = "roku_ldmled";
+	};
+
+	mediatek-fbdev {
+		#address-cells = <0x1>;
+		#size-cells = <0x0>;
+
+		compatible = "MTK-FBDEV";
+		PANEL_WIDTH = <3840>;
+		PANEL_HEIGHT = <2160>;
+		GRAPHIC_LAYER_COUNT = <2>;
+		GRAPHIC_LAYER_WIDTH = <1920 1920>;
+		GRAPHIC_LAYER_HEIGHT = <1080 1080>;
+		GRAPHIC_LAYOUT_PITCH = <1920 1920>;
+		GRAPHIC_OUT_PATH = <0 1 2>;
+		GRAPHIC_WINDOWS = <0 2 4>;
+		STILL_IMAGE_GOP = <2>;
+		STILL_IMAGE_LAYER_WIDTH = <3840>;
+		STILL_IMAGE_LAYER_HEIGHT = <2160>;
+		STILL_IMAGE_LAYER_PITCH = <3840>;
+		GOP_UVSWAP = <1>;
+	};
+};

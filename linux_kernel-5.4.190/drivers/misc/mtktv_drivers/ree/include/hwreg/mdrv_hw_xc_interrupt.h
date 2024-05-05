@@ -1,0 +1,35 @@
+#ifndef _MDRV_HW_XC_INTERRUPT_H_
+#define _MDRV_HW_XC_INTERRUPT_H_
+
+#ifdef _MDRV_HW_XC_INTERRUPT_C_
+#ifndef INTERFACE
+#define INTERFACE
+#endif
+#else
+#ifndef INTERFACE
+#define INTERFACE	extern
+#endif
+#endif
+
+#define IRQ_INT_DISP_OP_VS	(4)
+#define IRQ_INT_DISP_IP_VS	(16)
+#define IRQ_INT_DISP_OP1_VS	(15)
+#define IRQ_INT_DISP_DESCRB	(22)
+#define IRQ_INT_DISP_VRR	(50)
+#define IRQ_INT_DISP_EMP_DMA	(52)
+#define IRQ_INT_DISP_HD_DET	(53)
+
+typedef enum
+{
+	EN_XC_INTERRUPT_SCRIPT,
+	EN_XC_INTERRUPT_PQ,
+	EN_XC_INTERRUPT_SRCCAP,
+	EN_XC_INTERRUPT_RENDER,
+}EN_XC_INTERRUPT_TYPE;
+
+INTERFACE MS_U64 MDrv_HW_XC_GetDispIRQ(EN_XC_INTERRUPT_TYPE eInterruptType);
+INTERFACE void MDrv_HW_XC_ClearDispIRQ(MS_U64 u64IRQVal, EN_XC_INTERRUPT_TYPE eInterruptType);
+INTERFACE void MDrv_HW_XC_SetInterrupt(MS_U8 u8IntSrc, MS_BOOL bEnable);
+
+#undef INTERFACE
+#endif		//_MDRV_HW_XC_INTERRUPT_H_

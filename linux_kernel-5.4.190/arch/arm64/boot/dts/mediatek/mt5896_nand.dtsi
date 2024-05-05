@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
+/*
+ * Copyright (c) 2022 MediaTek Inc.
+ */
+
+/ {
+	nand0: mtk_fcie_nand {
+		compatible = "mediatek,nand-fcie";
+		interrupt-parent = <&mtk_intc0_irq>;
+		interrupts = <0x0 0x38 0x4>;
+		status ="okay";
+		reg = <0x0 0x1c660000 0x0 0x400>;
+		miu-base = <0x20000000>;
+		clocks = <&topgen_mux_gate CLK_TOPGEN_FCIE_CK>,
+			<&fcie_sw_en CLK_FCIE_EN_SMI_FCIE2FCIE>;
+		clock-names = "clk", "smi_fcie2fcie";
+		clk-bit-cnt = <0x03>;
+		freq-table-hz = <12000000 0>,
+				<24000000 6>,
+				<43200000 4>,
+				<48000000 7>,
+				<54000000 1>,
+				<62000000 2>;
+		nand-on-flash-bbt;
+	};
+};
